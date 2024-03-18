@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './dashboard.css'; // Import the CSS file for styling
 import { jwtDecode } from 'jwt-decode';
+import { PostJob } from '../Profile/Employer/PostJob';
 
 const WelcomeCard = () => {
     return (
@@ -238,6 +239,7 @@ const Dashboard = () => {
             <DashboardCards />
             <hr className="divider" />
             <AdminSignupForm />
+            <PostJob />
         </div>
     );
 };
