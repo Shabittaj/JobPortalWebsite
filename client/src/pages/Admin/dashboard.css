@@ -159,4 +159,22 @@
     .form_container {
         width: 80%;
     }
+
+}
+
+/* .dashboard-container {
+    display: flex;
+    flex-direction: row;
+} */
+
+.left-side {
+    flex: 1;
+    margin-right: 20px;
+    /* Adjust margin as needed */
+}
+
+.right-side {
+    flex: 1;
+    margin-left: 20px;
+    /* Adjust margin as needed */
 }

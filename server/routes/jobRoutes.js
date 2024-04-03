@@ -27,7 +27,7 @@ router.post('/:id/apply-job', userAuth, applyJobController);
 
 
 //AGET APPLIED JOB || GET 
-router.get('/:id/applications', userAuth, getAppliedData);
+router.get('/:id/applications', /*userAuth,*/ getAppliedData);
 
 
 //UPDATE JOB || PATCH

@@ -83,28 +83,31 @@ const DashboardCards = () => {
     }, [navigate]); // Empty dependency array to run the effect only once when the component mounts
 
     return (
-        <div className="dashboard-cards">
-            <div className="dashboard-card">
-                <div className="card-title">Jobseekers</div>
-                <div className="card-count">{dashboardData.totalJobSeekers}</div>
+        <>
+            <h2 align="center">DASHBOARD</h2>
+            <div className="dashboard-cards">
+                <div className="dashboard-card">
+                    <div className="card-title">Jobseekers</div>
+                    <div className="card-count">{dashboardData.totalJobSeekers}</div>
+                </div>
+                <div className="dashboard-card">
+                    <div className="card-title">Employers</div>
+                    <div className="card-count">{dashboardData.totalEmployers}</div>
+                </div>
+                <div className="dashboard-card">
+                    <div className="card-title">Jobs</div>
+                    <div className="card-count">{dashboardData.totalJobs}</div>
+                </div>
+                <div className="dashboard-card">
+                    <div className="card-title">Resumes Received</div>
+                    <div className="card-count">{dashboardData.totalResumes}</div>
+                </div>
+                <div className="dashboard-card">
+                    <div className="card-title">Applications Received</div>
+                    <div className="card-count">{dashboardData.totalApplications}</div>
+                </div>
             </div>
-            <div className="dashboard-card">
-                <div className="card-title">Employers</div>
-                <div className="card-count">{dashboardData.totalEmployers}</div>
-            </div>
-            <div className="dashboard-card">
-                <div className="card-title">Jobs</div>
-                <div className="card-count">{dashboardData.totalJobs}</div>
-            </div>
-            <div className="dashboard-card">
-                <div className="card-title">Resumes Received</div>
-                <div className="card-count">{dashboardData.totalResumes}</div>
-            </div>
-            <div className="dashboard-card">
-                <div className="card-title">Applications Received</div>
-                <div className="card-count">{dashboardData.totalApplications}</div>
-            </div>
-        </div>
+        </>
     );
 };
 
@@ -150,6 +153,7 @@ const AdminSignupForm = () => {
             });
             if (response.status === 201) {
                 alert('Admin created successfully');
+                set
                 setFirstName('');
                 setLastName('')
                 setEmail('')
@@ -189,9 +193,9 @@ const AdminSignupForm = () => {
             </Button>
             {show && <div className="modal-backdrop fade show" onClick={handleClose}></div>}
             <Modal show={show} onHide={handleClose} size="md" backdrop="static">
-                <Modal.Header closeButton onClick={handleClose}>
+                <Modal.Header >
                     <Modal.Title>Admin Signup
-                        <button type="submit" class="btn btn-success float-right mt-n4" onClick={handleClose}>X</button>
+                        <span className="close-btn" onClick={handleClose}>&times;</span>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -239,6 +243,7 @@ const Dashboard = () => {
             <DashboardCards />
             <hr className="divider" />
             <AdminSignupForm />
+            <hr className="divider" />
             <PostJob />
         </div>
     );

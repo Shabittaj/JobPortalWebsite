@@ -61,8 +61,8 @@ const JobDetails = () => {
     return <p>Loading...</p>;
   }
 
-  const { title, companyLogoUrl, description, industry, jobType, jobLocation, salary, createdAt, status, preferredEducation, preferredSkill, preferredExperience } = jobDetails.job;
-
+  const { title, description, industry, jobType, jobLocation, salary, createdAt, status, preferredEducation, preferredSkill, preferredExperience } = jobDetails.job;
+  const companyLogoUrl = jobDetails.job.companyLogoUrl.src;
   return (
     <div className="job-details">
       <div className="container-xxl text-left py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -115,7 +115,7 @@ const JobDetails = () => {
                           <i className="fa fa-check"></i>
                         </div>
                         <p>Job Applied Successfully!</p>
-                        <span className="close-btn" onClick={handleClose}>&times;</span>
+
                       </div>
                     </div>
                   )}

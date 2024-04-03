@@ -18,6 +18,7 @@ export const PostJob = () => {
     const [status, setStatus] = useState();
     const [description, setDescription] = useState();
     const [successMessage, setSuccessMessage] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

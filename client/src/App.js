@@ -21,6 +21,7 @@ import Footer from './components/Footer/Footer';
 import Showfooter from './components/Footer/Showfooter';
 import { AuthProvider } from './AuthContext';
 import Dashboard from './pages/Admin/dashboard';
+import Applications from './pages/Profile/Employer/Applications';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path="/jobseekerprofile" element={<JobSeekerProfile />} />
           <Route path="/employerprofile" element={<EmployerProfile />} />
+          <Route path="/job/:jobId/applications" element={<Applications />} />
         </Routes>
         <Showfooter>
           <Footer />

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Jobs.css';
 import Jobcard from '../../components/JobCard/Jobcard';
+import { jwtDecode } from 'jwt-decode';
 
 function Jobs() {
     const [jobs, setJobs] = useState([]);
@@ -12,9 +13,31 @@ function Jobs() {
         fetchData();
     }, [searchQuery]); // Run effect whenever searchQuery changes
 
+    const navigate = useNavigate();
     const fetchData = async () => {
         try {
             const token = localStorage.getItem('token');
+            if (!token) {
+                // Token is not present, redirect to login page
+                navigate('/');
+            } else {
+                // Token is present, but may be expired, you can check it here if needed
+                // You can decode the token to get the expiration time and compare it with the current time
+                // If the token is expired, redirect to login page
+
+                // For example, you can use jwt-decode library to decode the token
+                const decodedToken = jwtDecode(token);
+                const role = decodedToken.role;
+                const expirationTime = decodedToken.exp; // Expiration time in seconds since epoch
+                const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds since epoch
+
+                if (expirationTime < currentTime) {
+                    // Token is expired, redirect to login page
+                    alert('Token has expired. Please log in again.')
+                    navigate('/');
+
+                } // Convert milliseconds to seconds
+            }
             const response = await axios.get(`http://localhost:8000/app/v1/job/view-all-jobs?search=${searchQuery}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,

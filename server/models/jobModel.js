@@ -9,7 +9,7 @@ const jobSchema = new mongoose.Schema({
         filename: String,
         src: {
             type: String,
-            // default: "http://" + req.hostname + ":8000" + "/static/google.png", //default image for testing purposes
+            default: "http://localhost:8000/static/assets/jobPortal.png", //default image for testing purposes
         }
     },
     title: {
