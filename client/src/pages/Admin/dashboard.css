@@ -1,15 +1,29 @@
 .welcome-card {
-    background-color: #282c34;
-    color: white;
+    background-color:#00b199;
+    color:white;
     padding: 20px;
     margin-bottom: 20px;
 }
-
-.welcome-text {
-    font-size: 24px;
-    font-weight: bold;
+.dash{
+    color: #00b199;
 }
-
+.greenbtn{
+    background-color: #00b199;
+    border: none;
+    color: white;
+}
+.greenbtn:hover{
+    background-color: #024b41;
+    color: white;
+}
+.logoutbtn{
+    background-color: whitesmoke;
+    color:#00b199;
+}
+.logoutbtn:hover{
+    background-color:#024b41 ;
+    color: white;
+}
 .dashboard-cards {
     display: flex;
     flex-wrap: wrap;

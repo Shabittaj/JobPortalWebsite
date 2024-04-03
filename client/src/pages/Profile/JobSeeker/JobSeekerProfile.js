@@ -7,6 +7,7 @@ import {ProfessionalInfo} from "./ProfessionalInfo";
 import { ProjectsInfo } from './ProjectsInfo';
 import { Skills } from './Skills';
 import { Certifications } from './Certifications';
+import '../Profile.css';
 
 
 function JobSeekerProfile() {
@@ -69,12 +70,13 @@ function JobSeekerProfile() {
   return (
     
     <>
+    <div className='profile'>
     {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
       {jobSeekerProfile && (
-            <div className="container-xxl py-5">
-                <div className="container">
-                    <div className="row g-5">
+            <div className="container-xxl py-5 ">
+                <div className="container ">
+                    <div className="row g-5 ">
                         <div className="col-lg-4 col-xl-4">
                             <div className="card-box text-center">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
@@ -182,6 +184,7 @@ function JobSeekerProfile() {
                 </div>
             </div>
       )}
+      </div>
         </>
   )
 }

@@ -85,9 +85,9 @@ export const Company = () => {
             <div>
                 <div className="row">
                     <div className="col-lg-6">
-                        <h5 className="mb-2 text-uppercase text-left">
-                            <i className="fa fa-building"></i> &nbsp; Company Details
-                        </h5>
+                        <h3 className="mb-2 text-uppercase text-left greentext">
+                            <i className="fa fa-building "></i> &nbsp; Company Details
+                        </h3>
                     </div>
                 </div>
 
@@ -100,7 +100,7 @@ export const Company = () => {
                     </div>
                 </div>
                 <div className="col-lg-6">
-                        <Button className="btn btn-warning " onClick={handleEdit}>Edit</Button>
+                        <Button className="btn greenbtn " onClick={handleEdit}>Edit</Button>
                         <div className='h5 text-success p-3'>{successMessage}</div>
                     </div>
 
@@ -140,7 +140,7 @@ export const Company = () => {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleSave}>
+                        <Button variant="primary" className='btn greenbtn' onClick={handleSave}>
                             Save Changes
                         </Button>
                     </Modal.Footer>

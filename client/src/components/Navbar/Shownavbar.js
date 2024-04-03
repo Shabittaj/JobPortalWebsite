@@ -13,7 +13,8 @@ const Shownavbar=({children})=> {
          location.pathname === '/usersignup' ||
          location.pathname === '/employerdetails' ||
          location.pathname === '/jobseekerdetails' ||
-         location.pathname === '/adminlogin' ){
+         location.pathname === '/adminlogin' ||
+         location.pathname === '/dashboard'){
             setShowNavbar(false);
         }else{
             setShowNavbar(true);

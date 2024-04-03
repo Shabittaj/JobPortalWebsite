@@ -131,7 +131,7 @@ export const PostedJobs = () => {
             <div>
                 <div className="row">
                     <div className="col-lg-6">
-                        <h5 className="mb-4 text-uppercase text-left">
+                        <h5 className="mb-4 text-uppercase text-left greentext">
                             <i className="fa fa-briefcase"></i> &nbsp; Posted Jobs
                         </h5>
                     </div>
@@ -157,7 +157,7 @@ export const PostedJobs = () => {
                             {/* Buttons section */}
                             <div className="btn-group" role="group" aria-label="Job Actions">
                                 <Button className='btn btn-primary me-2' onClick={() => handleApplications(job._id)}>Applications</Button>
-                                <Button className='btn btn-warning me-2' onClick={() => handleEdit(index)}>Edit</Button>
+                                <Button className='btn greenbtn me-2' onClick={() => handleEdit(index)}>Edit</Button>
                                 <Button className='btn btn-danger' onClick={() => handleDelete(index)}>Delete</Button>
                             </div>
                         </div>
