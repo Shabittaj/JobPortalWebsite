@@ -4,8 +4,8 @@ import moment from "moment";
 
 const Jobcard = ({ job }) => {
   // Destructure job object for cleaner code
-  const { _id, companyLogoUrl, title, jobLocation, jobType, createdAt } = job;
-
+  const { _id, title, jobLocation, jobType, createdAt } = job;
+  const companyLogoUrl = job.companyLogoUrl.src;
   return (
     <Link to={`/jobdetails/${_id}`} className="job-card-link">
       <div className="job-item p-4 mb-4">
