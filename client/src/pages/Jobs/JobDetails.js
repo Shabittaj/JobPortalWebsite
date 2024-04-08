@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
+import { FaTimes } from 'react-icons/fa';
 import './Jobdetails.css';
 
 const JobDetails = () => {
@@ -111,11 +112,13 @@ const JobDetails = () => {
                   {appliedSuccess && (
                     <div className="success-overlay">
                       <div className="success-message">
+                        <div className="close-icon" onClick={() => setAppliedSuccess(false)}>
+                          <FaTimes />
+                        </div>
                         <div className="tick">
                           <i className="fa fa-check"></i>
                         </div>
                         <p>Job Applied Successfully!</p>
-
                       </div>
                     </div>
                   )}
