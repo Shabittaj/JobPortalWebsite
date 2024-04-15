@@ -1,11 +1,16 @@
 import express from 'express';
 import { userAuth } from '../middlewares/authMiddleware.js';
-import { emailGetController, idGetController, updateDetailsControllers, updateUserController } from '../controllers/profileController.js';
+import { addDetailsController, emailGetController, idGetController, updateDetailsControllers, updateUserController } from '../controllers/profileController.js';
 
 const router = express.Router();
 
 //GET WITH EMAIL || GET 
 router.get('/email-details', userAuth, emailGetController);
+
+
+//POST WITH EMAIL || POST 
+router.post('/add-details', userAuth, addDetailsController);
+
 
 //GET WITH ID || GET 
 router.get('/details', userAuth, idGetController);

@@ -133,23 +133,23 @@ export const updateDetailsControllers = async (req, res, next) => {
 
             const updateFields = req.body;
 
-            // if (updateFields.education) jobSeekerData.education = updateFields.education;
-            // if (updateFields.yearOfExperience) jobSeekerData.yearOfExperience = updateFields.yearOfExperience;
-            // if (updateFields.resume) jobSeekerData.resume = updateFields.resume;
-            // if (updateFields.portfolio) jobSeekerData.portfolio = updateFields.portfolio;
-            // if (updateFields.jobPreferences) jobSeekerData.jobPreferences = updateFields.jobPreferences;
-            // if (updateFields.workHistory) jobSeekerData.workHistory = updateFields.workHistory;
-            // if (updateFields.projects) jobSeekerData.projects = updateFields.projects;
-            // if (updateFields.certifications) jobSeekerData.certifications = updateFields.certifications;
-            // if (updateFields.skills) jobSeekerData.skills = updateFields.skills;
-            // if (updateFields.additionalInformation) jobSeekerData.additionalInformation = updateFields.additionalInformation;
+            if (updateFields.education) jobSeekerData.education = updateFields.education;
+            if (updateFields.yearOfExperience) jobSeekerData.yearOfExperience = updateFields.yearOfExperience;
+            if (updateFields.resume) jobSeekerData.resume = updateFields.resume;
+            if (updateFields.portfolio) jobSeekerData.portfolio = updateFields.portfolio;
+            if (updateFields.jobPreferences) jobSeekerData.jobPreferences = updateFields.jobPreferences;
+            if (updateFields.workHistory) jobSeekerData.workHistory = updateFields.workHistory;
+            if (updateFields.projects) jobSeekerData.projects = updateFields.projects;
+            if (updateFields.certifications) jobSeekerData.certifications = updateFields.certifications;
+            if (updateFields.skills) jobSeekerData.skills = updateFields.skills;
+            if (updateFields.additionalInformation) jobSeekerData.additionalInformation = updateFields.additionalInformation;
 
             // Update only the fields that are present in the request body
-            for (const key in updateFields) {
-                if (Object.prototype.hasOwnProperty.call(updateFields, key)) {
-                    jobSeekerData[key] = updateFields[key];
-                }
-            }
+            // for (const key in updateFields) {
+            //     if (Object.prototype.hasOwnProperty.call(updateFields, key)) {
+            //         jobSeekerData[key] = updateFields[key];
+            //     }
+            // }
 
             // Save the updated document
             updatedDetails = await jobSeekerData.save();
@@ -168,6 +168,53 @@ export const updateDetailsControllers = async (req, res, next) => {
             message: 'Error in updating details',
             status: false,
             error: error
+        });
+    }
+};
+
+
+export const addDetailsController = async (req, res, next) => {
+    try {
+        const id = req.user.userId;
+        const jobSeekerData = await jobSeekerModel.findOne({ userId: id });
+        if (!jobSeekerData) {
+            return res.status(401).json({ status: false, error: "Job seeker not found!" });
+        }
+
+        const { skills, experiences, certifications } = req.body;
+
+        // Add the new skills to the existing ones
+        if (skills && Array.isArray(skills)) {
+            jobSeekerData.skills.push(...skills);
+        }
+
+        // Add the new experiences to the existing ones
+        if (experiences && Array.isArray(experiences)) {
+            jobSeekerData.experiences.push(...experiences);
+        }
+
+        // Add the new certifications to the existing ones
+        if (certifications && Array.isArray(certifications)) {
+            jobSeekerData.certifications.push(...certifications);
+        }
+
+        // Save the updated document
+        await jobSeekerData.save();
+
+        res.status(200).json({
+            status: true,
+            message: "Details added successfully",
+            data: {
+                skills: jobSeekerData.skills,
+                experiences: jobSeekerData.experiences,
+                certifications: jobSeekerData.certifications
+            }
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: 'Error in adding details',
+            status: false,
+            error: error.message
         });
     }
 };
