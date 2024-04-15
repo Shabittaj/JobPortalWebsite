@@ -81,7 +81,7 @@ export const PersonalInfo = () => {
       {error && <div>Error: {error}</div>}
       {formData && (
       <div>
-        <h3 className="mb-4 text-uppercase text-left">
+        <h3 className="mb-4 text-uppercase text-left greentext">
           <i className="fa fa-briefcase"></i> &nbsp; Personal Info
         </h3>
 
@@ -197,7 +197,7 @@ export const PersonalInfo = () => {
                 Save
               </button>
             ) : (
-              <button className="btn btn-warning" onClick={handleEditClick}>
+              <button className="btn greenbtn" onClick={handleEditClick}>
                 Edit
               </button>
             )}

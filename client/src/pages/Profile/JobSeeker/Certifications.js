@@ -89,7 +89,7 @@ export const Certifications= () => {
                 <div className="row">
                     <div className="col-lg-6">
                         <h5 className="mb-4 text-uppercase text-left">
-                            <i className="fa fa-briefcase"></i> &nbsp; Certifications
+                            <i className="fa fa-briefcase greentext"></i> &nbsp; Certifications
                         </h5>
                     </div>
                     <div className="col-lg-6">
@@ -106,7 +106,7 @@ export const Certifications= () => {
                             <p><small>{certifications.issuanceDate.split('T')[0]}</small></p>
                         </div>
                         <div className="col-lg-2">
-                            <Button className='btn btn-warning' onClick={() => handleEdit(index)}>Edit</Button>
+                            <Button className='btn greenbtn' onClick={() => handleEdit(index)}>Edit</Button>
                         </div>
                     </div>
                 ))}

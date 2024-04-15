@@ -13,7 +13,9 @@ const Showfooter=({children})=> {
         location.pathname === '/usersignup' ||
         location.pathname === '/employerdetails' ||
         location.pathname === '/jobseekerdetails' ||
-        location.pathname === '/adminlogin'){
+        location.pathname === '/adminlogin' ||
+        location.pathname === '/dashboard' ||
+        location.pathname === '/verify'){
             setShowFooter(false);
         }else{
             setShowFooter(true);
