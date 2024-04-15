@@ -28,7 +28,7 @@ const Jobcard = ({ job }) => {
               </span>
               {/* Displaying a static salary range for demonstration */}
               <span className="text-truncate text-dark  me-0">
-                <i className="far fa-money-bill-alt greentext me-2"></i>{job?.salary?.min} - {job?.salary?.max}
+                <i className="far fa-money-bill-alt greentext me-2"></i>${job?.salary?.min} - ${job?.salary?.max}
               </span>
             </div>
           </div>

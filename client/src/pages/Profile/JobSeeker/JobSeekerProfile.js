@@ -71,7 +71,9 @@ function JobSeekerProfile() {
     
     <>
     <div className='profile'>
-    {loading && <div>Loading...</div>}
+    {loading && <div class="d-flex justify-content-center align-items-center">
+                  <div class="loader "></div>
+                </div>}
       {error && <div>Error: {error}</div>}
       {jobSeekerProfile && (
             <div className="container-xxl py-5 ">
@@ -127,12 +129,12 @@ function JobSeekerProfile() {
                                             onClick={() => handleTab('certifications')}>
                                         Certifications
                                     </button>
-                                    <button type="button"
-                                            className="mb-1 btn btn-block btn-outline-secondary">
-                                              <Link to={`data:${jobSeekerProfile.details.resume.contentType};base64,${jobSeekerProfile.details.resume.data}`} 
-                                              download={jobSeekerProfile.details.resume.filename} className='jobseekerlink'>Download Resume</Link>
-                                        
-                                    </button>
+                                    <button type="button" className="mb-1 btn btn-block btn-outline-secondary">
+                                    <a href={jobSeekerProfile.details.resume.src} download={jobSeekerProfile.details.resume.filename} target="_blank" rel="noopener noreferrer" className='jobseekerlink'>
+                                      Download Resume
+                                    </a>
+                                  </button>
+
                                     <button type="button"
                                             className="btn btn-block btn-outline-secondary"
                                             onClick={handleLogout}>

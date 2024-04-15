@@ -20,7 +20,7 @@ const About = () => {
       <img src={JobImg} alt="About" className="about-img" />
     </div>
     <div class="fs-5 px-3 text-justify pb-5">
-    <p>
+    <p class="text-justify fs-5">
       XYZ Job Portal is not just a job board; it's a gateway to your future. Our commitment goes beyond connecting job seekers with employers; we focus on creating meaningful connections that lead to long-lasting career satisfaction.
 
        <h3 className='about mt-3 mb-3'>Why choose XYZ Job Portal?</h3>
@@ -31,7 +31,7 @@ const About = () => {
         <li className='mb-3'><strong className='about'>Employer Partnerships:</strong> We collaborate with leading companies to bring you exclusive job opportunities.</li>
       </ul>
 
-      <p>
+      <p class="text-justify fs-5">
         Join the XYZ Job Portal community and embark on a journey of professional growth. Your dream job awaits!
 
         <h3 className='about mt-3 mb-3'>Additional Details:</h3>
