@@ -93,7 +93,7 @@ export const PostJob = () => {
                 Post a Job
             </Button>
             <div className='h5 text-success p-3'>{successMessage}</div>
-
+            {show && 
             <Modal show={show} onHide={handleClose} size="xl">
                 <Modal.Header closeButton>
                     <Modal.Title>Post a Job</Modal.Title>
@@ -178,6 +178,7 @@ export const PostJob = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            }
         </>
     );
 };

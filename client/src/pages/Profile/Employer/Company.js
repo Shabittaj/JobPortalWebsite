@@ -103,7 +103,7 @@ export const Company = () => {
                         <Button className="btn greenbtn " onClick={handleEdit}>Edit</Button>
                         <div className='h5 text-success p-3'>{successMessage}</div>
                     </div>
-
+                {show && 
                 <Modal show={show} onHide={handleClose} size="lg">
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Company Details</Modal.Title>
@@ -145,6 +145,7 @@ export const Company = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                }
             </div>
         </>
     );

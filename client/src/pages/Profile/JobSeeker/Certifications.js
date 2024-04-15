@@ -113,7 +113,8 @@ export const Certifications= () => {
 
 
                 {/* Add/Edit Experience Modal */}
-                <Modal show={show} onHide={handleClose} size="lg">
+                {show &&
+                <Modal show={show} onHide={handleClose} size="lg" >
                     <Modal.Header closeButton>
                         <Modal.Title>Add Certifications</Modal.Title>
                     </Modal.Header>
@@ -152,6 +153,7 @@ export const Certifications= () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                 }
             </div>
         </>
     )

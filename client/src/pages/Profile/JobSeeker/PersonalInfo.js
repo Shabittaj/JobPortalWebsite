@@ -1,211 +1,185 @@
 import React, { useState, useEffect } from 'react';
 import '../Profile.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export const PersonalInfo = () => {
-  const [userData, setUserData] = useState(null);
-  const [formData, setFormData] = useState(null);
+  const [show, setShow] = useState(false);
+  const [user, setUser] = useState({});
+  const [error,setError]= useState(false);
   const [successMessage, setSuccessMessage] = useState('');
-  console.log(formData);
-  const [isEditing, setIsEditing] = useState(false);
-  const [error, setError] = useState(null);
+  console.log(user);
+  const [formData, setFormData] = useState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      address: '',
+      phoneNumber:'',
+      role:''
+  }); 
+  const handleClose = () => setShow(false);
 
-  const fetchPersonalInfo = async () => {
+  const handleEdit = () => {
+    setFormData({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        address: user.address,
+        phoneNumber:user.phoneNumber,
+        role:user.role
+    });
+    setShow(true); // Open the modal
+};
+
+  const fetchUserDetails = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const lastFetchedTime = localStorage.getItem('lastFetchedTime');
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:8000/app/v1/profile/details', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
-      const response = await fetch('http://localhost:8000/app/v1/profile/details', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'If-Modified-Since': lastFetchedTime, // Conditional header
-        },
-      });
-
-      if (!response.ok) {
-        if (response.status === 304) {
-          console.log('Data not modified'); // Handle 304 case
-        } else {
-          throw new Error('Failed to fetch personal info');
+        if (!response.ok) {
+            throw new Error('Failed to fetch User details');
         }
-      } else {
+
         const data = await response.json();
-        setFormData(data);
-        localStorage.setItem('lastFetchedTime', new Date().toISOString());
-      }
+        setUser(data.data || {}); // Assuming 'details' contains company details
     } catch (error) {
-      console.error('Error fetching personal info:', error);
-      setError(error.message);
+        console.error('Error fetching User details:', error);
+        // Handle error appropriately
     }
-  };
+};
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleSaveClick = async () => {
-    try {
+const handleSave = async () => {
+  try {
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:8000/app/v1/profile/update-user', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
+          method: 'PATCH',
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
       });
-  
+
       if (!response.ok) {
-        throw new Error('Failed to update personal info');
+          throw new Error('Failed to update company');
       }
-  
-      // Update state with the new form data
-      setUserData(formData);
-      console.log("User updated successfully")
+
+      // Update company state with the new details
+      setUser(formData);
       setSuccessMessage('Personal Details update successfully!');
-      setIsEditing(false); // Optionally, you can set isEditing to false here
-    } catch (error) {
-      setError(error.message);
-      console.error('Error updating personal info:', error);
-    }
-  };
-  
+      handleClose();
+  } catch (error) {
+      console.error('Error updating company:', error);
+      // Handle error appropriately
+  }
+};
+
+
 
   // Moved useEffect hook below to ensure data fetching occurs after component mounts
   useEffect(() => {
-    fetchPersonalInfo();
+    fetchUserDetails();
   }, []);  // Empty dependency array to run once on component mount
 
   return (
     <>
       {error && <div>Error: {error}</div>}
-      {formData && (
       <div>
-        <h3 className="mb-4 text-uppercase text-left greentext">
-          <i className="fa fa-briefcase"></i> &nbsp; Personal Info
-        </h3>
+                <div className="row">
+                    <div className="col-lg-6">
+                        <h3 className="mb-2 text-uppercase text-left greentext">
+                            <i className="fa fa-building "></i> &nbsp; Personal Info
+                        </h3>
+                    </div>
+                </div>
 
-        <div className="row">
-          <div className="col-lg-6">
-            <div className="form-group text-left d-flex align-items-center mb-4">
-              <label htmlFor="first_name" className="mr-2 profilelabel">First Name:</label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  className="form-control"
-                  id="first_name"
-                  value={formData.firstName}
-                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                />
-              ) : (
-                <p className="ps-2 mb-0 profilecontent">{formData.data.firstName || '—'}</p>
-              )}
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="form-group text-left  d-flex align-items-center mb-4">
-              <label htmlFor="last_name" className="mr-2 profilelabel">Last Name:</label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  className="form-control"
-                  id="last_name"
-                  value={formData.lastName}
-                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                />
-              ) : (
-                <p className="ps-2 mb-0 profilecontent">{formData.data.lastName || '—'}</p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="row mt-2">
-          <div className="col-lg-6">
-            <div className="form-group text-left d-flex align-items-center  mb-4">
-              <label htmlFor="email" className="mr-2 profilelabel">Email : </label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  className="form-control"
-                  id="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              ) : (
-                <p className="ps-2 mb-0 profilecontent">{formData.data.email || '—'}</p>
-              )}
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="form-group text-left d-flex align-items- mb-4">
-              <label htmlFor="contact_number" className="mr-2 profilelabel">Contact Number : </label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  className="form-control"
-                  id="contact_number"
-                  value={formData.phoneNumber}
-                  onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                />
-              ) : (
-                <p className="ps-2 mb-0 profilecontent">{formData.data.phoneNumber || '—'}</p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="row mt-2">
-          <div className="col-lg-6">
-            <div className="form-group text-left d-flex align-items-center mb-4">
-              <label htmlFor="present_address" className="mr-2 profilelabel">Address:</label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  className="form-control"
-                  id="present_address"
-                  value={formData.address}
-                  onChange={(e) => setFormData({ ...formData,address: e.target.value })}
-                />
-              ) : (
-                <p className="ps-2 mb-0 profilecontent">{formData.data.address || '—'}</p>
-              )}
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="form-group text-left d-flex align-items-center mb-4">
-              <label htmlFor="permanent_address" className="mr-2 profilelabel">Role:</label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  className="form-control"
-                  id="permanent_address"
-                  value={formData.role}
-                  onChange={(e) => setFormData({ ...formData,role: e.target.value })}
-                />
-              ) : (
-                <p className="ps-2 mb-0 profilecontent">{formData.data.role || '—'}</p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="row mt-2">
-          <div className="col-lg-12">
-            {isEditing ? (
-              <button className="btn btn-primary" onClick={handleSaveClick}>
-                Save
-              </button>
-            ) : (
-              <button className="btn greenbtn" onClick={handleEditClick}>
-                Edit
-              </button>
-            )}
-          </div>
-          <div className='h5 text-success p-3'>{successMessage}</div>
-        </div>
-      </div>
-      )}
+                <div className="row text-left p-3">
+                    <div className="col-lg-7">
+                        <p className='pb-4 h4 '><strong>First Name:</strong> {user.firstName}</p>
+                        </div>
+                        <div className="col-lg-5">
+                        <p className='h4 pb-4'><strong>Last Name:</strong> {user.lastName}</p>
+                        </div>
+                        <div className="col-lg-7">
+                        <p className='h4 pb-4'><strong>Email:</strong> {user.email}</p>
+                        </div>
+                        <div className="col-lg-5">
+                        <p className='h4 pb-4'><strong>Phone No:</strong> {user.phoneNumber}</p>
+                        </div>
+                        <div className="col-lg-7">
+                        <p className='h4 pb-4'><strong>Address:</strong> {user.address}</p>
+                        </div>
+                        <div className="col-lg-5">
+                        <p className='h4 pb-4'><strong>Role:</strong> {user.role}</p>
+                        </div>
+                   
+                    <div className="col-lg-6">
+                        <Button className="btn greenbtn " onClick={handleEdit}>Edit</Button>
+                        <div className='h5 text-success p-3'>{successMessage}</div>
+                    </div>
+                    {show && 
+                <Modal show={show} onHide={handleClose} size="lg">
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Personal Details</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="row mt-2">
+                            <div className="col-lg-12 mt-2">
+                                <div className="form-group text-left">
+                                    <label htmlFor="companyName">First Name</label>
+                                    <input type="text" className="form-control" id="firstName" name="firstName" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} />
+                                </div>
+                            </div>
+                            <div className="col-lg-12 mt-2">
+                                <div className="form-group text-left">
+                                    <label htmlFor="companyDescription">Last Name</label>
+                                    <input type="text" className="form-control" id="lastName" name="lastName" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
+                                </div>
+                            </div>
+                            <div className="col-lg-12 mt-2">
+                                <div className="form-group text-left">
+                                    <label htmlFor="companyWebsite">Email</label>
+                                    <input type="text" className="form-control" id="email" name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+                                </div>
+                            </div>
+                            <div className="col-lg-12 mt-2">
+                                <div className="form-group text-left">
+                                    <label htmlFor="industry">Address</label>
+                                    <input type="text" className="form-control" id="address" name="address" value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
+                                </div>
+                            </div>
+                            <div className="col-lg-12 mt-2">
+                                <div className="form-group text-left">
+                                    <label htmlFor="industry">Phone Number</label>
+                                    <input type="text" className="form-control" id="phonenumber" name="phonenumber" value={formData.phoneNumber} onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} />
+                                </div>
+                            </div>
+                            <div className="col-lg-12 mt-2">
+                                <div className="form-group text-left">
+                                    <label htmlFor="industry">Role</label>
+                                    <input type="text" className="form-control" id="role" name="role" value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })} />
+                                </div>
+                            </div>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" className='btn greenbtn' onClick={handleSave}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                }
+                </div>
+                
+      </div>              
     </>
   );
 };

@@ -117,6 +117,7 @@ export const ProfessionalInfo = () => {
 
 
                 {/* Add/Edit Experience Modal */}
+                {show && 
                 <Modal show={show} onHide={handleClose} size="lg">
                     <Modal.Header closeButton>
                         <Modal.Title>Add Experience</Modal.Title>
@@ -167,6 +168,7 @@ export const ProfessionalInfo = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                }
             </div>
         </>
     )

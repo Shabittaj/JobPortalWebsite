@@ -166,6 +166,7 @@ export const PostedJobs = () => {
                 ))}
 
                 {/* Add/Edit Experience Modal */}
+                {show && 
                 <Modal show={show} onHide={handleClose} size="lg">
                     <Modal.Header closeButton>
                         <Modal.Title>Update Job Details</Modal.Title>
@@ -229,6 +230,7 @@ export const PostedJobs = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                }
             </div>
         </>
     )

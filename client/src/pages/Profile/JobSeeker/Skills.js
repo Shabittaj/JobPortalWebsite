@@ -110,7 +110,6 @@ export const Skills = () => {
     };
 
     return (
-<<<<<<< HEAD
         <>            <div>
             <div className="row">
                 <div className="col-lg-6">
@@ -129,24 +128,16 @@ export const Skills = () => {
                     <div className="col-lg-10">
                         <h5>{skills.skillName}</h5>
                         <strong>{skills.proficiency}</strong> <br />
-=======
-        <>
-            <div>
-                <div className="row">
-                    <div className="col-lg-6">
-                        <h5 className="mb-4 text-uppercase text-left greentext">
-                            <i className="fa fa-briefcase"></i> &nbsp; Skills
-                        </h5>
->>>>>>> c6bca61ff853a054130269386f0e1a7b550e0ee9
                     </div>
                     <div className="col-lg-2">
-                        <Button className='btn btn-warning' onClick={() => handleEdit()}>Edit</Button>
+                        <Button className='btn greenbtn' onClick={() => handleEdit()}>Edit</Button>
                     </div>
                 </div>
             ))}
 
 
             {/* Add/Edit Experience Modal */}
+            {show &&
             <Modal show={show} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>Add Skills</Modal.Title>
@@ -161,16 +152,11 @@ export const Skills = () => {
                                     onChange={(e) => setFormData({ ...formData, skillName: e.target.value })} />
                             </div>
                         </div>
-<<<<<<< HEAD
                         <div className="col-lg-12 mt-2">
                             <div className="form-group text-left">
                                 <label htmlFor="jobTitle">Proficiency</label>
                                 <input type="text" className="form-control" id="jobTitle" name="companyName" value={formData.proficiency} onChange={(e) => setFormData({ ...formData, proficiency: e.target.value })} />
                             </div>
-=======
-                        <div className="col-lg-2">
-                            <Button className='btn greenbtn' onClick={() => handleEdit(index)}>Edit</Button>
->>>>>>> c6bca61ff853a054130269386f0e1a7b550e0ee9
                         </div>
 
                         {/* Add other input fields similarly */}
@@ -185,6 +171,7 @@ export const Skills = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            }
         </div>
         </>
     );
