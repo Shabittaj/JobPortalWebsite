@@ -6,7 +6,6 @@ import {PersonalInfo} from "../JobSeeker/PersonalInfo";
 import { Company } from './Company';
 import { PostJob } from './PostJob';
 import { PostedJobs } from './PostedJob';
-import '../Profile.css';
 
 
 function EmployerProfile() {
@@ -69,7 +68,6 @@ function EmployerProfile() {
   return (
     
     <>
-    <div className='profile'>
     {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
       {jobSeekerProfile && (
@@ -171,7 +169,6 @@ function EmployerProfile() {
                 </div>
             </div>
       )}
-      </div>
         </>
   )
 }

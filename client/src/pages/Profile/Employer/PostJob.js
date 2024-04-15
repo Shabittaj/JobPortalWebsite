@@ -78,7 +78,7 @@ export const PostJob = () => {
 
             <div className="row">
                 <div className="col-lg-6">
-                    <h3 className="mb-2 text-uppercase text-left greentext">
+                    <h3 className="mb-2 text-uppercase text-left">
                         <i className="fa fa-building"></i> &nbsp; Create Job
                     </h3>
                 </div>
@@ -89,7 +89,7 @@ export const PostJob = () => {
                 <p className='h6 pb-2'>The job will not be created if all fields are not provided.</p>
             </div>
 
-            <Button variant="primary" className='btn greenbtn' onClick={handleShow}>
+            <Button variant="primary" onClick={handleShow}>
                 Post a Job
             </Button>
             <div className='h5 text-success p-3'>{successMessage}</div>
@@ -167,13 +167,13 @@ export const PostJob = () => {
                             </div>
 
                             <div className="col-12">
-                                <button className="btn greenbtn w-100" type="submit">Post Job</button>
+                                <button className="btn btn-primary w-100" type="submit">Post Job</button>
                             </div>
                         </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary"  onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
                 </Modal.Footer>

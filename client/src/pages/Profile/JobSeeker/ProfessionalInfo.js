@@ -91,7 +91,7 @@ export const ProfessionalInfo = () => {
             <div>
                 <div className="row">
                     <div className="col-lg-6">
-                        <h5 className="mb-4 text-uppercase text-left greentext">
+                        <h5 className="mb-4 text-uppercase text-left">
                             <i className="fa fa-briefcase"></i> &nbsp; Experience
                         </h5>
                     </div>
@@ -110,7 +110,7 @@ export const ProfessionalInfo = () => {
                             <p>{experience.responsibilities}</p>
                         </div>
                         <div className="col-lg-2">
-                            <Button className='btn greenbtn' onClick={() => handleEdit(index)}>Edit</Button>
+                            <Button className='btn btn-warning' onClick={() => handleEdit(index)}>Edit</Button>
                         </div>
                     </div>
                 ))}

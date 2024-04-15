@@ -8,17 +8,9 @@ import { jwtDecode } from 'jwt-decode';
 import { PostJob } from '../Profile/Employer/PostJob';
 
 const WelcomeCard = () => {
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem('authToken');
-        navigate('/');
-      };
-
     return (
-        <div className="welcome-card d-flex justify-content-between">
-            <h2 className="welcome-text">WELCOME TO JOB PORTAL ADMIN </h2>
-            <button type="button" className="btn logoutbtn" onClick={handleLogout}>Logout</button>
+        <div className="welcome-card">
+            <p className="welcome-text">Welcome to Job Portal Admin</p>
         </div>
     );
 };
@@ -92,7 +84,7 @@ const DashboardCards = () => {
 
     return (
         <>
-            <h2 align="center" className='dash'>DASHBOARD</h2>
+            <h2 align="center">DASHBOARD</h2>
             <div className="dashboard-cards">
                 <div className="dashboard-card">
                     <div className="card-title">Jobseekers</div>
@@ -161,6 +153,7 @@ const AdminSignupForm = () => {
             });
             if (response.status === 201) {
                 alert('Admin created successfully');
+                set
                 setFirstName('');
                 setLastName('')
                 setEmail('')
@@ -194,12 +187,10 @@ const AdminSignupForm = () => {
     }, [show]);
     return (
         <>
-            <h2 align="center" className='dash'>Admin Manager</h2>
-            <div className='d-flex align-item-center justify-content-center'>
-            <Button className='btn greenbtn' onClick={handleShow}>
+            <h2 align="center">Admin Manager</h2>
+            <Button variant="primary" onClick={handleShow}>
                 Create Admin
             </Button>
-            </div>
             {show && <div className="modal-backdrop fade show" onClick={handleClose}></div>}
             <Modal show={show} onHide={handleClose} size="md" backdrop="static">
                 <Modal.Header >

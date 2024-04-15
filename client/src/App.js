@@ -24,41 +24,50 @@ import Dashboard from './pages/Admin/dashboard';
 import Applications from './pages/Profile/Employer/Applications';
 
 function App() {
-
   return (
-
     <Router>
       <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </Router>
+  );
+}
 
+function AppContent() {
+  const location = useLocation();
+  const isOTPPage = location.pathname === '/verify';
+
+  return (
+    <>
+      {!isOTPPage && (
         <Shownavbar>
           <Navbar />
         </Shownavbar>
-        <Routes>
-          <Route path='/' element={<UserLogin />} />
-          <Route path='/verify' element={<OTPverify />} />
-          <Route path='/usersignup' element={<UserSignup />} />
-          <Route path='/adminlogin' element={<Adminlogin />} />
-
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/employerdetails' element={<EmployerDetails />} />
-          <Route path='/jobseekerdetails' element={<JobSeekerDetails />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route path='/jobdetails/:id' element={<JobDetails />} />
-          <Route path="/about" element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path="/jobseekerprofile" element={<JobSeekerProfile />} />
-          <Route path="/employerprofile" element={<EmployerProfile />} />
-          <Route path="/job/:jobId/applications" element={<Applications />} />
-        </Routes>
+      )}
+      <Routes>
+        <Route path='/' element={<UserLogin />} />
+        <Route path='/verify' element={<OTPverify />} />
+        <Route path='/usersignup' element={<UserSignup />} />
+        <Route path='/adminlogin' element={<Adminlogin />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/employerdetails' element={<EmployerDetails />} />
+        <Route path='/jobseekerdetails' element={<JobSeekerDetails />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path='/jobdetails/:id' element={<JobDetails />} />
+        <Route path="/about" element={<About />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path="/jobseekerprofile" element={<JobSeekerProfile />} />
+        <Route path="/employerprofile" element={<EmployerProfile />} />
+        <Route path="/job/:jobId/applications" element={<Applications />} />
+      </Routes>
+      {!isOTPPage && (
         <Showfooter>
           <Footer />
         </Showfooter>
-      </AuthProvider>
-    </Router>
-
+      )}
+    </>
   );
 }
 
 export default App;
-

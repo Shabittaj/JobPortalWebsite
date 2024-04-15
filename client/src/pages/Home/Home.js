@@ -45,6 +45,9 @@ function Home() {
             <img src={TitleImg} className='image'/>
           </div>
         </div>
+        <div className='container'>
+        <h1 className='pt-5 text-center'>Our Trusted Companies</h1>
+      </div>
 
       <div className="container-xxl py-5">
                 <div className="container">
@@ -132,12 +135,16 @@ function Home() {
                         </div>
                         <div className="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                             <h1 className="mb-4">We Help To Get The Best Job And Find A Talent</h1>
-                            <p className="mb-4">XYZ Job Portal is not just a job board; it's a gateway to your future. Our commitment goes beyond connecting job seekers with employers; we focus on creating meaningful connections that lead to long-lasting career satisfaction.</p>
+                            <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam
+                                amet diam et
+                                eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore
+                                erat
+                                amet</p>
                             <p><i className="fa fa-check text-primary me-3"></i>Comprehensive Job Listings</p>
                             <p><i className="fa fa-check text-primary me-3"></i>Personalized Profiles</p>
                             <p><i className="fa fa-check text-primary me-3"></i>Career Resources
                             </p>
-                            <a className="btn greenbtn py-3 px-5 mt-3" onClick={handleClick}>Read More</a>
+                            <a className="btn btnn py-3 px-5 mt-3" onClick={handleClick}>Read More</a>
                         </div>
                     </div>
                 </div>
