@@ -120,7 +120,7 @@ export const updateDetailsControllers = async (req, res, next) => {
 
             // Update only the fields that are present in the request body
             for (const key in updateFields) {
-                if (Object.prototype.hasOwnProperty.call(updateField, key)) {
+                if (Object.prototype.hasOwnProperty.call(updateFields, key)) {
                     employerData[key] = updateFields[key];
                 }
             }
@@ -164,6 +164,7 @@ export const updateDetailsControllers = async (req, res, next) => {
         });
 
     } catch (error) {
+        console.log(error);
         return res.status(400).json({
             message: 'Error in updating details',
             status: false,

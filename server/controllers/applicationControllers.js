@@ -30,7 +30,8 @@ export const applyJobController = async (req, res, next) => {
                 jobSeekerId: jobSeekerId
             });
             if (existingApplication) {
-                return next('You have already applied to this job');
+                // return next('You have already applied to this job');
+                return res.status(400).json({ message: "You have already applied to this job" })
             }
 
             // Create a new application
